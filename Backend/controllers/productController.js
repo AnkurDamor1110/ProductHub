@@ -31,6 +31,7 @@ exports.addProduct = async (req, res) => {
 exports.deleteProduct = async (req, res) => {
     try {
         const { id } = req.params;
+        console.log(id);
         await Product.findByIdAndDelete(id);
         // res.status(200).json({ message: 'Product deleted successfully' });
         res.status(200).send({ message: "Product deleted successfully", success: true });

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: 'http://localhost:5000/products', 
+    baseURL: 'https://producthub-2yyq.onrender.com/products', 
 });
 
 // Get all products
@@ -13,5 +13,3 @@ export const addProduct = (product) => API.post('/', product);
 // Delete a product by ID
 export const deleteProduct = (id) => API.delete(`/${id}`);
 
-
-export const updateProductCategory = (id) => API.patch(`/${id}`);

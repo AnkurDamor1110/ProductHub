@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "v20.5.0"
+  },
   "name": "backend",
   "version": "1.0.0",
   "description": "This is server side logic.",
@@ -10,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "mongoose": "^8.9.1",
     "node": "^23.4.0",

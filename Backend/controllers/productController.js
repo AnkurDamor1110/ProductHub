@@ -4,7 +4,6 @@ const Product = require('../models/productModel');
 exports.getProducts = async (req, res) => {
     try {
         const products = await Product.find();
-        // res.json(products);
         res.status(200).send({ message: "Products fetched successfully", success: true, data: products });
     } catch (error) {
         res.status(500).send({ message: "Error creating ", success: false, error });
@@ -19,10 +18,8 @@ exports.addProduct = async (req, res) => {
 
     try {
         const savedProduct = await newProduct.save();
-        console.log(savedProduct);
         res.status(200).send({ message: "Products Add successfully", success: true, data: savedProduct });
     } catch (error) {
-        console.log(error);
         res.status(400).send({ message: "Error", success: false, error });
     }
 };
@@ -33,7 +30,6 @@ exports.deleteProduct = async (req, res) => {
         const { id } = req.params;
         console.log(id);
         await Product.findByIdAndDelete(id);
-        // res.status(200).json({ message: 'Product deleted successfully' });
         res.status(200).send({ message: "Product deleted successfully", success: true });
     } catch (error) {
         res.status(500).json({ message: error.message });

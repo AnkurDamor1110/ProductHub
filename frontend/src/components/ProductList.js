@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getProducts, deleteProduct } from '../services/api';
+import { getProducts, deleteProduct } from '../services/api'; // import Api calls
 import './ProductList.css';
 import AddProductForm from './AddProductForm'; // Import AddProductForm
 
@@ -25,6 +25,7 @@ const ProductList = () => {
     fetchProducts(); // Fetch products when the component mounts
   }, []);
 
+  // Function to delete products from the API
   const handleDelete = async (id) => {
     const confirmed = window.confirm('Are you sure you want to delete this product?');
     if (!confirmed) return;
@@ -50,6 +51,7 @@ const ProductList = () => {
   };
 
   return (
+    // Display products
     <div className="container">
       <h1 className="text-center">Product List</h1>
       {loading && (
@@ -72,7 +74,7 @@ const ProductList = () => {
                 onClick={() => handleDelete(product._id)}
                 className="delete-button"
               >
-                <i className="fa fa-trash"></i> Delete
+                 Delete
               </button>
             </div>
           </div>

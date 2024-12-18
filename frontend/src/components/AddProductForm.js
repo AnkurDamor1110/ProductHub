@@ -3,7 +3,7 @@ import { addProduct } from '../services/api';
 import './AddProductForm.css';
 
 const AddProductForm = ({ closeDialog, onProductAdded }) => {
-  const [name, setName] = useState('');
+  const [name, setName] = useState(''); // state for data store
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
   const [loading, setLoading] = useState(false); // Loading state
@@ -30,6 +30,7 @@ const AddProductForm = ({ closeDialog, onProductAdded }) => {
   };
 
   return (
+    // logic for loading and form for input data
     <div className="form-container">
       {loading && (
         <div className="loading-overlay">

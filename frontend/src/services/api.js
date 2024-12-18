@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: 'https://producthub-2yyq.onrender.com/products', 
+    baseURL: 'https://producthub-2yyq.onrender.com/products', // Backend URL 
 });
 
 // Get all products

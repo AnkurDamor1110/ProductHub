@@ -12,3 +12,6 @@ export const addProduct = (product) => API.post('/', product);
 
 // Delete a product by ID
 export const deleteProduct = (id) => API.delete(`/${id}`);
+
+
+export const updateProductCategory = (id) => API.patch(`/${id}`);

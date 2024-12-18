@@ -1,47 +1,91 @@
 import React, { useState } from 'react';
 import { addProduct } from '../services/api';
+import './AddProductForm.css';
 
-const AddProductForm = () => {
-    const [name, setName] = useState('');
-    const [price, setPrice] = useState('');
-    const [category, setCategory] = useState('');
-    
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const newProduct = { name, price, category };
+const AddProductForm = ({ closeDialog, onProductAdded }) => {
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState('');
+  const [category, setCategory] = useState('');
+  const [loading, setLoading] = useState(false); // Loading state
 
-        try {
-            await addProduct(newProduct);
-            setName('');
-            setPrice('');
-            setCategory('');
-            alert('Product added successfully!');
-        } catch (error) {
-            console.error('Error adding product:', error);
-            alert('Failed to add product');
-        }
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newProduct = { name, price, category };
 
-    return (
-        <div>
-            <h1>Add New Product</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Name:</label>
-                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
-                </div>
-                <div>
-                    <label>Price:</label>
-                    <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} required />
-                </div>
-                <div>
-                    <label>Category:</label>
-                    <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} required />
-                </div>
-                <button type="submit">Add Product</button>
-            </form>
+    setLoading(true); // Show loading spinner
+    try {
+      await addProduct(newProduct); // Add product to the backend
+      setName(''); // Clear form fields
+      setPrice('');
+      setCategory('');
+      alert('Product added successfully!');
+      closeDialog(); // Close the dialog after adding the product
+      onProductAdded(); // Call onProductAdded to refresh the product list
+    } catch (error) {
+      console.error('Error adding product:', error);
+      alert('Failed to add product');
+    } finally {
+      setLoading(false); // Hide loading spinner
+    }
+  };
+
+  return (
+    <div className="form-container">
+      {loading && (
+        <div className="loading-overlay">
+          <div className="spinner"></div>
         </div>
-    );
+      )}
+      <form onSubmit={handleSubmit} className="form">
+        <div className="form-group">
+          <label className="form-label">Name:</label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            className="form-input"
+          />
+        </div>
+        <div className="form-group">
+          <label className="form-label">Price:</label>
+          <input
+            type="number"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            required
+            className="form-input"
+          />
+        </div>
+        <div className="form-group">
+          <label className="form-label">Category:</label>
+          <input
+            type="text"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            required
+            className="form-input"
+          />
+        </div>
+        <div className="form-actions">
+          <button
+            type="button"
+            onClick={closeDialog}
+            className="button button-cancel"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className="button button-submit"
+            disabled={loading} // Disable submit button when loading
+          >
+            Add Product
+          </button>
+        </div>
+      </form>
+    </div>
+  );
 };
 
 export default AddProductForm;

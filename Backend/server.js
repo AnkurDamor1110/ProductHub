@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const productRoutes = require('./routes/productRoutes');
 
 
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({ origin: 'https://producthub11.netlify.app/' }));
 app.use(express.json());
 
 const MONGO_URL = process.env.MONGO_URL;
